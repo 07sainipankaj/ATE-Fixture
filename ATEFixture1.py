@@ -20,8 +20,8 @@ class Fixture:
 
         self.root = root
         self.root.title("ATE Fixture")
-        self.window_width= 450
-        self.window_height=250
+        self.window_width= 350
+        self.window_height=260
         # Get the screen dimensions
         self.screen_width = self.root.winfo_screenwidth()
         self.screen_height = self.root.winfo_screenheight()
@@ -32,6 +32,8 @@ class Fixture:
 
         # Set the geometry with position
         root.geometry(f"{self.window_width}x{self.window_height}+{x}+{y}")
+
+
          
         self.GUI()
     def load_fix(self):
@@ -63,19 +65,19 @@ class Fixture:
         self.style.configure("TButton", font= self.custom_font3)
 
         self.Label = tb.Label(self.root, text="Enter Project/Part Number")
-        self.Label.grid(row=0, column=0, padx=100, pady=10, sticky="ew")
+        self.Label.grid(row=0, column=0, padx=50, pady=10, sticky="ew")
 
         self.searchEntry = AutocompleteEntry(self.root, self.all_keys,placeholder="for ex. 9006", font=self.custom_font4)
-        self.searchEntry.grid(row=1, column=0, padx=100, pady=10,sticky="ew")
+        self.searchEntry.grid(row=1, column=0, padx=50, pady=10,sticky="ew")
 
         #self.searchentry = tb.Entry(self.root,font=self.custom_font4)
         #self.searchentry.grid(row=1, column=0, padx=100, pady=10, sticky="ew")
 
         self.search = tb.Button(self.root,width=24, text="Submit", command=self.submit)
-        self.search.grid(row=2, column=0, padx=100, pady=10, sticky="ew")
+        self.search.grid(row=2, column=0, padx=50, pady=10, sticky="ew")
 
         self.Label1 = tb.Label(self.root, text="")
-        self.Label1.grid(row=3, column=0, padx=100, pady=10, sticky="ew")
+        self.Label1.grid(row=3, column=0, padx=50, pady=10, sticky="ew")
 
     def submit(self):
         fix_to_search= self.searchEntry.get().lower()
