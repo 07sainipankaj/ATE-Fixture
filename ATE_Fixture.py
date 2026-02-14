@@ -98,17 +98,15 @@ class Fixture:
                 
     def  refresh(self):
         if os.path.exists(self.standard_path):
-            #print("Directory found")
-   
             proj= list(os.listdir(self.standard_path))
-            print(proj) # list files inside
+            #print(proj) # list files inside
         else:
             messagebox.showerror("Error", "Entry cannot be empty.")
 
         json_fix = self.load_json()   # load json file
         json_list=[]
         json_list= list(json_fix.keys())
-        print(json_list)
+        #print(json_list)
 
         self.difference= list(set(proj)-set(json_list))
         if self.difference ==[]:
@@ -118,7 +116,11 @@ class Fixture:
             
 
     def updatefixture(self):
-        self.top = tb.Toplevel(app)  # ttkbootstrap top-level
+        if hasattr(self, "top") and self.top.winfo_exists():
+            self.top.focus()
+            self.top.lift()
+            return
+        self.top = tb.Toplevel(self.root)  # ttkbootstrap top-level
         self.top.title("Update Window")
         self.window_width=400
         self.window_height=400
@@ -126,7 +128,7 @@ class Fixture:
         self.screen_height = self.root.winfo_screenheight()
         x = (self.screen_width // 2) - (self.window_width // 2)
         y = (self.screen_height // 2) - (self.window_height // 2)
-        self.top.geometry(f"{self.window_width}x{self.window_height}+{x+100}+{y-100}")
+        self.top.geometry(f"{self.window_width}x{self.window_height}+{x+450}+{y-10}")
 
         tb.Label(self.top, text="Enter Fixture Number",
                  font=("Segoe UI", 14, "bold")).pack(pady=10)
@@ -334,42 +336,4 @@ if __name__=="__main__":
     app= Fixture(root)
     root.mainloop()
 
-
-'''
-if os.path.exists(standard_path):
-    #print("Directory found")
-   
-    proj= list(os.listdir(standard_path))
-    #print(proj) # list files inside
-else:
-    print("Directory not found")
-
-json_list=[]
-with open(JSON_FILE,"r")as f:
-    fix= json.load(f)
-    for key,value in fix.items():
-        json_list.append(key)
-        #print("json_list-->",json_list)
-
-    
-
-
-difference= list(set(proj)-set(json_list))
-print(difference)
-
-#diff_key = str(list(difference))
-#   # e.g., "['CCT-9006-02']"
-#diff_key = difference.pop()
-for diff_key in difference[:2]:
-    # Ask user for value
-    value = input(f"Enter value for {diff_key}: ")
-    fix[diff_key] = value
-#fix[diff_key] = "2"
-
-# Save back to JSON
-with open(JSON_FILE, "w") as f:
-    json.dump(fix, f, indent=4)
-
-print("Updated JSON:", fix)
-'''
 
