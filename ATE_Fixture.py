@@ -169,7 +169,7 @@ class Fixture:
                 new_data[key] = value
 
         if not new_data:
-            messagebox.showwarning("Warning", "No fixture numbers entered.")
+            messagebox.showwarning("Warning", "Please enter new data")
             return
 
         entries_text = "\n".join([f"{key} : {value}" for key, value in new_data.items()])
